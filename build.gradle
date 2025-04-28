@@ -24,15 +24,46 @@ repositories {
 }
 
 dependencies {
+	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Spring Security
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// Spring Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Thymeleaf
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Cache
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'com.github.ben-manes.caffeine:caffeine:3.1.6'
+
+	// AutoMappers
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	implementation 'org.modelmapper:modelmapper:2.4.4'
+
+	// Postgres
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.postgresql:postgresql'
+
+	// Rate Limiter
+	//implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0'
+	//implementation 'com.github.vladimir-bukhtoyarov:bucket4j-jcache:7.6.0'
+
+	// RabbitMQ
+	//implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	//implementation 'org.springframework.boot:spring-boot-starter'
+	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {

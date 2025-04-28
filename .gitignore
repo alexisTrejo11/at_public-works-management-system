@@ -26,3 +26,6 @@ replay_pid*
 # Gradle
 .gradle/
 .idea
+
+# Env
+.env
