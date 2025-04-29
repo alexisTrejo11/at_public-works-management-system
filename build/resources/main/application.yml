@@ -11,3 +11,13 @@ spring:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
 server:
   port: ${SERVER_PORT}
+
+
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000  # 10 mins in ms
+      cache-null-values: false

@@ -1,4 +1,4 @@
-package com.publicworks.public_works_management.contracts.infrastructure.persistence;
+package com.publicworks.public_works_management.contracts.infrastructure.ports.output.persistence;
 
 import jakarta.persistence.*;
 import lombok.Data;

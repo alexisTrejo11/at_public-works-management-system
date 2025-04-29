@@ -1,4 +1,4 @@
-package com.publicworks.public_works_management.contracts.infrastructure.persistence;
+package com.publicworks.public_works_management.contracts.infrastructure.ports.output.persistence;
 
 import jakarta.persistence.*;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "contracts")
-public class ContractEntity {
+public class ContractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
