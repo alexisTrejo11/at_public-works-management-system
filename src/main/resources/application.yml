@@ -9,5 +9,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    properties:
+      hibernate:
+        dialect: ${SPRING_JPA_HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
 server:
   port: ${SERVER_PORT}
+
+redis:
+  host: ${SPRING_REDIS_HOST}
+  port: ${SPRING_REDIS_PORT}
+cache:
+  type: redis
+  redis:
+    time-to-live: 600000  # 10 mins in ms
+    cache-null-values: false

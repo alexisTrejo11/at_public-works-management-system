@@ -1,9 +1,13 @@
 package com.publicworks.public_works_management.contracts.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.publicworks.public_works_management.contracts.application.service.CreateContractCommand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -16,11 +20,22 @@ public class CreateContractRequest {
     private String description;
 
     @JsonProperty("start_date")
-    private String startDate;
+    private LocalDate startDate;
 
     @JsonProperty("end_date")
-    private String endDate;
+    private LocalDate endDate;
 
     @JsonProperty("budget")
-    private double budget;
+    private BigDecimal budget;
+
+    public CreateContractCommand toCommand() {
+        return new CreateContractCommand(
+                name,
+                description,
+                startDate,
+                endDate,
+                budget,
+                null
+        );
+    }
 }

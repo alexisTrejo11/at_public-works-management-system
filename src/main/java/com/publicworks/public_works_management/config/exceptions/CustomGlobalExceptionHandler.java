@@ -1,5 +1,7 @@
 package com.publicworks.public_works_management.config.exceptions;
 
+import com.publicworks.public_works_management.contracts.domain.exceptions.ContractClauseNotFoundException;
+import com.publicworks.public_works_management.contracts.domain.exceptions.ContractNotFoundException;
 import com.publicworks.public_works_management.shared.response.http.ResponseWrapper;
 
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,19 @@ public class CustomGlobalExceptionHandler {
         );
 
         return ResponseEntity.badRequest().body(responseWrapper);
+    }
+
+    /* Not Found Exceptions */
+    @ExceptionHandler({ContractNotFoundException.class, ContractClauseNotFoundException.class})
+    public ResponseEntity<ResponseWrapper<Void>> handleNotFoundExceptions(RuntimeException ex) {
+        ResponseWrapper<Void> responseWrapper = new ResponseWrapper<>(
+                false,
+                null,
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(responseWrapper, HttpStatus.NOT_FOUND);
     }
 
     /* Generic Exception */

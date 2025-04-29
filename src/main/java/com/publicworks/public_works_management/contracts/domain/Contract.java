@@ -4,8 +4,10 @@ import com.publicworks.public_works_management.contracts.domain.exceptions.*;
 import com.publicworks.public_works_management.contracts.domain.valueObjects.ContractId;
 import com.publicworks.public_works_management.contracts.domain.valueObjects.ContractStatus;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Getter
@@ -26,7 +28,11 @@ public class Contract {
     @Builder.Default
     private final List<ContractClause> clauses = new ArrayList<>();
 
-    // Domain Logic
+    public void validateFields() {
+        this.validateStartDate();
+        this.validateEndDate();
+    }
+
     public void addClause(ContractClause clause) {
         Objects.requireNonNull(clause, "Clause cannot be null");
         if (!status.equals(ContractStatus.DRAFT)) {
@@ -63,5 +69,36 @@ public class Contract {
 
     public List<ContractClause> getClauses() {
         return Collections.unmodifiableList(clauses);
+    }
+
+    public Boolean is_active() {
+        LocalDate now = LocalDate.now();
+        return now.isBefore(this.endDate) &&
+                this.status != ContractStatus.COMPLETED &&
+                this.status != ContractStatus.TERMINATED;
+
+    }
+
+    public long getDaysRemaining() {
+        LocalDate now = LocalDate.now();
+        long daysRemaining = 0;
+
+        if (this.endDate != null) {
+            daysRemaining = Math.max(0, (int) ChronoUnit.DAYS.between(now, this.endDate));
+        }
+
+        return daysRemaining;
+    }
+
+    public void validateStartDate() {
+        if (startDate == null || startDate.isBefore(LocalDate.now())) {
+            throw new ContractValidationException("La fecha de inicio del contrato debe ser hoy o en el futuro.");
+        }
+    }
+
+    public void validateEndDate() {
+        if (endDate == null || endDate.isBefore(startDate)) {
+            throw new ContractValidationException("La fecha de finalización del contrato debe ser posterior o igual a la fecha de inicio.");
+        }
     }
 }

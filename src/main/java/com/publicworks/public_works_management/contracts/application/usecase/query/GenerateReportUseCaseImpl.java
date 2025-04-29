@@ -1,7 +1,6 @@
-package com.publicworks.public_works_management.contracts.application.usecase;
+package com.publicworks.public_works_management.contracts.application.usecase.query;
 
 import com.publicworks.public_works_management.contracts.application.dto.response.ContractSummary;
-import com.publicworks.public_works_management.contracts.application.mapper.ContractMappers;
 import com.publicworks.public_works_management.contracts.application.ports.input.command.ContractService;
 import com.publicworks.public_works_management.contracts.domain.Contract;
 import com.publicworks.public_works_management.contracts.domain.exceptions.ContractNotFoundException;

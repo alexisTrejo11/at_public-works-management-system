@@ -1,14 +1,24 @@
 package com.publicworks.public_works_management.contracts.infrastructure.ports.output.persistence;
 
+import com.publicworks.public_works_management.contracts.domain.valueObjects.ContractStatus;
+import com.publicworks.public_works_management.shared.models.SQLModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "contracts")
-public class ContractModel {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class ContractModel extends SQLModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,5 +49,5 @@ public class ContractModel {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "contract_id")
-    private List<ContractClause> clauses = new ArrayList<>();
+    private List<ContractClauseModel> clauses = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import lombok.Value;
 public class ContractClause {
     String clauseNumber;
     String title;
+    String description;
     String content;
     boolean mandatory;
 
