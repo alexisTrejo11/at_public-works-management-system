@@ -1,5 +1,6 @@
 package com.publicworks.public_works_management.contracts.infrastructure.ports.output.persistence;
 
+import com.publicworks.public_works_management.bids.infrastructure.persistence.BidModel;
 import com.publicworks.public_works_management.contracts.domain.valueObjects.ContractStatus;
 import com.publicworks.public_works_management.shared.models.SQLModel;
 import jakarta.persistence.*;
@@ -26,9 +27,9 @@ public class ContractModel extends SQLModel {
     @Column(nullable = false, unique = true, name = "contract_number")
     private String contractNumber;
 
-    //@OneToOne
-    //@JoinColumn(name = "bid_id")
-    private Long bid;
+    @OneToOne
+    @JoinColumn(name = "bid_id")
+    private BidModel bid;
 
     //@ManyToOne
     //@JoinColumn(name = "contractor_id")
